@@ -1,6 +1,8 @@
 from flask import Flask
+
+from app.models.user import User
 from .extensions import db, login_manager
-from .auth import auth as auth_blueprint
+from .auth import auth_bp
 from .vehicles import vehicles as vehicles_blueprint
 from .drivers import drivers as drivers_blueprint
 from .trips import trips as trips_blueprint
@@ -19,7 +21,7 @@ def create_app():
     login_manager.init_app(app)
 
     # Register blueprints
-    app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(vehicles_blueprint, url_prefix='/vehicles')
     app.register_blueprint(drivers_blueprint, url_prefix='/drivers')
     app.register_blueprint(trips_blueprint, url_prefix='/trips')
@@ -28,3 +30,7 @@ def create_app():
     app.register_blueprint(reports_blueprint, url_prefix='/reports')
 
     return app
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))

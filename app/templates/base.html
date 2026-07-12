@@ -3,26 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>TransitOps</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">TransitOps</a>
-    </nav>
-    <div class="container">
-        <div class="flash-messages">
-            <!-- Flash messages will be displayed here -->
-        </div>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert alert-info">
-                    {{ messages[0] }}
-                </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">TransitOps</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a></li>
             {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
+        </ul>
     </div>
+</nav>
+<div class="container">
+    <div class="flash-messages">
+        <!-- Flash messages will be displayed here -->
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</div>
 </body>
 </html>

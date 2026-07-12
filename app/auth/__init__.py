@@ -1,9 +1,6 @@
 from flask import Blueprint
 
-# Create a blueprint for auth
+# Create a single Blueprint object for authentication
+auth_bp = Blueprint('auth', __name__)
 
-auth = Blueprint('auth', __name__)
-
-@auth.route('/')
-def index():
-    return 'Auth Blueprint Working'
+from . import routes  # Import routes to register them with the blueprint
