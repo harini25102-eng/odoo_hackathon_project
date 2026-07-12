@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Add Vehicle</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-dismissible fade show" role="alert">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('vehicles.create_vehicle') }}" method="POST">
+        <div class="form-group">
+            <label for="registration_number">Registration Number</label>
+            <input type="text" name="registration_number" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Vehicle Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="vehicle_type">Vehicle Type</label>
+            <input type="text" name="vehicle_type" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="max_load_capacity">Maximum Load Capacity</label>
+            <input type="number" name="max_load_capacity" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="odometer">Odometer</label>
+            <input type="number" name="odometer" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="acquisition_cost">Acquisition Cost</label>
+            <input type="number" name="acquisition_cost" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" class="form-control" required>
+                <option value="Available">Available</option>
+                <option value="On Trip">On Trip</option>
+                <option value="In Shop">In Shop</option>
+                <option value="Retired">Retired</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ url_for('vehicles.list_vehicles') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

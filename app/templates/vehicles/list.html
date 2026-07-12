@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Vehicle List</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-dismissible fade show" role="alert">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if vehicles %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Registration Number</th>
+                    <th>Vehicle Name</th>
+                    <th>Vehicle Type</th>
+                    <th>Max Load Capacity</th>
+                    <th>Odometer</th>
+                    <th>Acquisition Cost</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in vehicles %}
+                    <tr>
+                        <td>{{ vehicle.registration_number }}</td>
+                        <td>{{ vehicle.name }}</td>
+                        <td>{{ vehicle.vehicle_type }}</td>
+                        <td>{{ vehicle.max_load_capacity }}</td>
+                        <td>{{ vehicle.odometer }}</td>
+                        <td>{{ vehicle.acquisition_cost }}</td>
+                        <td>{{ vehicle.status }}</td>
+                        <td>
+                            <a href="{{ url_for('vehicles.edit_vehicle', id=vehicle.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ url_for('vehicles.delete_vehicle', id=vehicle.id) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No vehicles available.</p>
+    {% endif %}
+    
+    <a href="{{ url_for('vehicles.add_vehicle') }}" class="btn btn-primary">Add Vehicle</a>
+</div>
+{% endblock %}

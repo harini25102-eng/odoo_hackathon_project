@@ -10,7 +10,7 @@ class Maintenance(db.Model):
     end_date = db.Column(db.DateTime, nullable=True)  # End date of maintenance
     status = db.Column(db.String(50), nullable=False)  # Current status of the maintenance
 
-    vehicle = db.relationship('Vehicle', backref='maintenance_logs')  # Relationship to Vehicle
+    vehicle = db.relationship('Vehicle', back_populates='maintenance_logs')  # Relationship to Vehicle
 
     def __repr__(self):
         return f'<Maintenance {self.id}>'

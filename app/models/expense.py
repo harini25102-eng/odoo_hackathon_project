@@ -9,7 +9,7 @@ class Expense(db.Model):
     cost = db.Column(db.Float, nullable=False)  # Cost of the expense
     date = db.Column(db.Date, nullable=False)  # Date of the expense
 
-    vehicle = db.relationship('Vehicle', backref='expense_logs')  # Relationship to Vehicle
+    vehicle = db.relationship('Vehicle', back_populates='expense_logs')  # Relationship to Vehicle
 
     def __repr__(self):
         return f'<Expense {self.id}>'

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Edit Vehicle</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-dismissible fade show" role="alert">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('vehicles.update_vehicle', id=vehicle.id) }}" method="POST">
+        <div class="form-group">
+            <label for="registration_number">Registration Number</label>
+            <input type="text" name="registration_number" class="form-control" value="{{ vehicle.registration_number }}" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Vehicle Name</label>
+            <input type="text" name="name" class="form-control" value="{{ vehicle.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="vehicle_type">Vehicle Type</label>
+            <input type="text" name="vehicle_type" class="form-control" value="{{ vehicle.vehicle_type }}" required>
+        </div>
+        <div class="form-group">
+            <label for="max_load_capacity">Maximum Load Capacity</label>
+            <input type="number" name="max_load_capacity" class="form-control" value="{{ vehicle.max_load_capacity }}" required>
+        </div>
+        <div class="form-group">
+            <label for="odometer">Odometer</label>
+            <input type="number" name="odometer" class="form-control" value="{{ vehicle.odometer }}" required>
+        </div>
+        <div class="form-group">
+            <label for="acquisition_cost">Acquisition Cost</label>
+            <input type="number" name="acquisition_cost" class="form-control" value="{{ vehicle.acquisition_cost }}" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" class="form-control" required>
+                <option value="Available" {% if vehicle.status == 'Available' %}selected{% endif %}>Available</option>
+                <option value="On Trip" {% if vehicle.status == 'On Trip' %}selected{% endif %}>On Trip</option>
+                <option value="In Shop" {% if vehicle.status == 'In Shop' %}selected{% endif %}>In Shop</option>
+                <option value="Retired" {% if vehicle.status == 'Retired' %}selected{% endif %}>Retired</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('vehicles.list_vehicles') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

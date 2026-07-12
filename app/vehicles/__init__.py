@@ -1,9 +1,7 @@
 from flask import Blueprint
 
-# Create a blueprint for vehicles
+# Create the blueprint
+vehicles = Blueprint("vehicles", __name__)
 
-vehicles = Blueprint('vehicles', __name__)
-
-@vehicles.route('/')
-def index():
-    return 'Vehicles Blueprint Working'
+# Import routes so Flask registers them
+from . import routes

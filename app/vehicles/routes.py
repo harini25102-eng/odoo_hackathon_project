@@ -3,20 +3,20 @@ from app.models.vehicle import Vehicle  # Import the Vehicle model
 from app.extensions import db  # Import the database instance
 
 # Import the existing Blueprint object for vehicles
-from . import vehicles_bp
+from . import vehicles
 
-@vehicles_bp.route('/', methods=['GET'])
+@vehicles.route('/', methods=['GET'])
 def list_vehicles():
     """Display all vehicles."""
     vehicles = Vehicle.query.all()  # Query all vehicles from the database
     return render_template('vehicles/list.html', vehicles=vehicles)  # Render the list of vehicles
 
-@vehicles_bp.route('/add', methods=['GET'])
+@vehicles.route('/add', methods=['GET'])
 def add_vehicle():
     """Display Add Vehicle form."""
     return render_template('vehicles/add.html')  # Render the add vehicle form
 
-@vehicles_bp.route('/add', methods=['POST'])
+@vehicles.route('/add', methods=['POST'])
 def create_vehicle():
     """Create a new vehicle."""
     registration_number = request.form.get('registration_number')
@@ -53,13 +53,13 @@ def create_vehicle():
     flash("Vehicle added successfully!", 'success')  # Flash success message
     return redirect(url_for('vehicles.list_vehicles'))  # Redirect to the list of vehicles
 
-@vehicles_bp.route('/edit/<int:id>', methods=['GET'])
+@vehicles.route('/edit/<int:id>', methods=['GET'])
 def edit_vehicle(id):
     """Display Edit Vehicle form."""
     vehicle = Vehicle.query.get_or_404(id)  # Get the vehicle by ID or return 404 if not found
     return render_template('vehicles/edit.html', vehicle=vehicle)  # Render the edit vehicle form
 
-@vehicles_bp.route('/edit/<int:id>', methods=['POST'])
+@vehicles.route('/edit/<int:id>', methods=['POST'])
 def update_vehicle(id):
     """Update vehicle."""
     vehicle = Vehicle.query.get_or_404(id)  # Get the vehicle by ID or return 404 if not found
@@ -91,7 +91,7 @@ def update_vehicle(id):
     flash("Vehicle updated successfully!", 'success')  # Flash success message
     return redirect(url_for('vehicles.list_vehicles'))  # Redirect to the list of vehicles
 
-@vehicles_bp.route('/delete/<int:id>', methods=['POST'])
+@vehicles.route('/delete/<int:id>', methods=['POST'])
 def delete_vehicle(id):
     """Delete vehicle."""
     vehicle = Vehicle.query.get_or_404(id)  # Get the vehicle by ID or return 404 if not found

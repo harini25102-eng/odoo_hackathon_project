@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Edit Driver</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-dismissible fade show" role="alert">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('drivers.update_driver', id=driver.id) }}" method="POST">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" value="{{ driver.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="license_number">License Number</label>
+            <input type="text" name="license_number" class="form-control" value="{{ driver.license_number }}" required>
+        </div>
+        <div class="form-group">
+            <label for="license_category">License Category</label>
+            <input type="text" name="license_category" class="form-control" value="{{ driver.license_category }}" required>
+        </div>
+        <div class="form-group">
+            <label for="license_expiry_date">License Expiry Date</label>
+            <input type="date" name="license_expiry_date" class="form-control" value="{{ driver.license_expiry_date }}" required>
+        </div>
+        <div class="form-group">
+            <label for="contact_number">Contact Number</label>
+            <input type="text" name="contact_number" class="form-control" value="{{ driver.contact_number }}" required>
+        </div>
+        <div class="form-group">
+            <label for="safety_score">Safety Score</label>
+            <input type="number" name="safety_score" class="form-control" value="{{ driver.safety_score }}" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" class="form-control" required>
+                <option value="Available" {% if driver.status == 'Available' %}selected{% endif %}>Available</option>
+                <option value="On Trip" {% if driver.status == 'On Trip' %}selected{% endif %}>On Trip</option>
+                <option value="Unavailable" {% if driver.status == 'Unavailable' %}selected{% endif %}>Unavailable</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ url_for('drivers.list_drivers') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

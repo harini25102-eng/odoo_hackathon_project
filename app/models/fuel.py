@@ -9,7 +9,7 @@ class Fuel(db.Model):
     cost = db.Column(db.Float, nullable=False)  # Cost of the fuel
     date = db.Column(db.Date, nullable=False)  # Date of the fuel log
 
-    vehicle = db.relationship('Vehicle', backref='fuel_logs')  # Relationship to Vehicle
+    vehicle = db.relationship('Vehicle', back_populates='fuel_logs')  # Relationship to Vehicle
 
     def __repr__(self):
         return f'<Fuel {self.id}>'
