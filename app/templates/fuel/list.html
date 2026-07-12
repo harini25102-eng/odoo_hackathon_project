@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Fuel Logs</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-dismissible fade show" role="alert">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if fuel_logs %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Liters</th>
+                    <th>Cost</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in fuel_logs %}
+                    <tr>
+                        <td>{{ log.vehicle.registration_number }}</td>
+                        <td>{{ log.liters }}</td>
+                        <td>{{ log.cost }}</td>
+                        <td>{{ log.date.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <a href="{{ url_for('fuel.edit_fuel', id=log.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ url_for('fuel.delete_fuel', id=log.id) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No fuel logs available.</p>
+    {% endif %}
+    
+    <a href="{{ url_for('fuel.add_fuel') }}" class="btn btn-primary">Add Fuel Log</a>
+</div>
+{% endblock %}
