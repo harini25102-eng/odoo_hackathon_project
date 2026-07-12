@@ -5,7 +5,7 @@ from .extensions import db, login_manager
 from .auth import auth_bp
 from .vehicles import vehicles as vehicles_blueprint
 from .drivers import drivers_bp
-from .trips import trips as trips_blueprint
+from .trips import  trips_bp
 from .maintenance import maintenance as maintenance_blueprint
 from .fuel import fuel as fuel_blueprint
 from .reports import reports as reports_blueprint
@@ -24,7 +24,7 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(vehicles_blueprint, url_prefix='/vehicles')
     app.register_blueprint(drivers_bp, url_prefix='/drivers')
-    app.register_blueprint(trips_blueprint, url_prefix='/trips')
+    app.register_blueprint(trips_bp, url_prefix='/trips')
     app.register_blueprint(maintenance_blueprint, url_prefix='/maintenance')
     app.register_blueprint(fuel_blueprint, url_prefix='/fuel')
     app.register_blueprint(reports_blueprint, url_prefix='/reports')

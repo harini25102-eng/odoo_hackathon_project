@@ -1,9 +1,5 @@
 from flask import Blueprint
 
-# Create a blueprint for trips
+trips_bp = Blueprint('trips', __name__)
 
-trips = Blueprint('trips', __name__)
-
-@trips.route('/')
-def index():
-    return 'Trips Blueprint Working'
+from . import routes

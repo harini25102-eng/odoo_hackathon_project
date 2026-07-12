@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Create New Trip</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">Vehicle</label>
+
+                <select class="form-control" name="vehicle_id" required>
+
+                    <option value="">Select Vehicle</option>
+
+                    {% for vehicle in vehicles %}
+
+                        <option value="{{ vehicle.id }}">
+
+                            {{ vehicle.registration_number }} -
+                            {{ vehicle.name }}
+
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">Driver</label>
+
+                <select class="form-control" name="driver_id" required>
+
+                    <option value="">Select Driver</option>
+
+                    {% for driver in drivers %}
+
+                        <option value="{{ driver.id }}">
+
+                            {{ driver.name }}
+
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">Source</label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    name="source"
+                    required>
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">Destination</label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    name="destination"
+                    required>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">Cargo Weight (Kg)</label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    class="form-control"
+                    name="cargo_weight"
+                    required>
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">Planned Distance (Km)</label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    class="form-control"
+                    name="planned_distance"
+                    required>
+
+            </div>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="form-label">Trip Status</label>
+
+            <select
+                class="form-control"
+                name="status"
+                required>
+
+                <option value="Draft">Draft</option>
+
+                <option value="Dispatched">
+                    Dispatched
+                </option>
+
+                <option value="Completed">
+                    Completed
+                </option>
+
+                <option value="Cancelled">
+                    Cancelled
+                </option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="btn btn-success"
+            type="submit">
+
+            Create Trip
+
+        </button>
+
+        <a
+            href="{{ url_for('trips.list_trips') }}"
+            class="btn btn-secondary">
+
+            Cancel
+
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}
