@@ -1,9 +1,5 @@
 from flask import Blueprint
 
-# Create a blueprint for maintenance
+maintenance_bp = Blueprint("maintenance", __name__)
 
-maintenance = Blueprint('maintenance', __name__)
-
-@maintenance.route('/')
-def index():
-    return 'Maintenance Blueprint Working'
+from . import routes
