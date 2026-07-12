@@ -56,7 +56,7 @@ def login():
             if user and check_password_hash(user.password_hash, password):
                 login_user(user)
                 flash('Login successful!', 'success')
-                return redirect(url_for('main.index'))  # Redirect to index page
+                return redirect(url_for('dashboard.dashboard'))  # Redirect to dashboard
             flash('Invalid email or password.', 'danger')
 
     return render_template('login.html')

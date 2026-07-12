@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="mb-4">
+        <h1 class="fw-bold">🚚 TransitOps Dashboard</h1>
+        <p class="text-muted">Fleet Management System Overview</p>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h5>Total Vehicles</h5>
+                    <h2>{{ total_vehicles }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <h5>Total Drivers</h5>
+                    <h2>{{ total_drivers }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <h5>Total Trips</h5>
+                    <h2>{{ total_trips }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-warning text-dark">
+                <div class="card-body text-center">
+                    <h5>Maintenance Records</h5>
+                    <h2>{{ total_maintenance }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-secondary text-white">
+                <div class="card-body text-center">
+                    <h5>Fuel Logs</h5>
+                    <h2>{{ total_fuel_logs }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body text-center">
+                    <h5>Expense Records</h5>
+                    <h2>{{ total_expenses }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    Vehicle Status
+                </div>
+
+                <div class="card-body">
+
+                    <p><strong>Available Vehicles:</strong> {{ available_vehicles }}</p>
+
+                    <p><strong>Vehicles In Shop:</strong> {{ vehicles_in_shop }}</p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    Recent Trips
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if recent_trips %}
+
+                    <table class="table table-striped">
+
+                        <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Source</th>
+
+                            <th>Destination</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% for trip in recent_trips %}
+
+                        <tr>
+
+                            <td>{{ trip.id }}</td>
+
+                            <td>{{ trip.source }}</td>
+
+                            <td>{{ trip.destination }}</td>
+
+                            <td>{{ trip.status }}</td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                    {% else %}
+
+                        <p>No trips available.</p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-reports_bp = Blueprint("reports", __name__)
+dashboard_bp = Blueprint("dashboard", __name__)
 
 from . import routes
