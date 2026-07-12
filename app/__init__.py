@@ -8,6 +8,7 @@ from .drivers import drivers_bp
 from .trips import  trips_bp
 from .maintenance import maintenance_bp
 from .fuel import fuel_bp
+from .expenses import expenses_bp
 from .reports import reports as reports_blueprint
 
 # Application factory
@@ -27,6 +28,7 @@ def create_app():
     app.register_blueprint(trips_bp, url_prefix='/trips')
     app.register_blueprint(maintenance_bp, url_prefix='/maintenance')
     app.register_blueprint(fuel_bp, url_prefix='/fuel')
+    app.register_blueprint(expenses_bp, url_prefix='/expenses')
     app.register_blueprint(reports_blueprint, url_prefix='/reports')
 
     return app
