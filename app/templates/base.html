@@ -18,7 +18,8 @@
         }
 
         .navbar{
-            background:#0d6efd;
+               background:#0d6efd;
+               box-shadow:0 2px 15px rgba(0,0,0,0.15);
         }
 
         .navbar-brand,
@@ -28,21 +29,54 @@
         }
 
         .content{
-            margin-top:30px;
+            margin-top:35px;
+            margin-bottom:35px;
         }
 
         .card{
-            border:none;
-            border-radius:15px;
-            box-shadow:0 4px 12px rgba(0,0,0,.08);
+              border:none;
+             border-radius:16px;
+             box-shadow:0 8px 20px rgba(0,0,0,.08);
+             transition:0.25s ease;
+        }
+
+      .card:hover{
+           transform:translateY(-4px);
+           box-shadow:0 12px 28px rgba(0,0,0,.15);
+        }
+        .btn{
+             border-radius:10px;
+              font-weight:600;
+              padding:8px 18px;
+        }
+
+     .btn:hover{
+          transform:translateY(-2px);
+          transition:.2s;
+        }
+
+        .table{
+              border-radius:12px;
+              overflow:hidden;
+         }
+
+        .table thead{
+             background:#0d6efd;
+             color:white;
+        }
+
+        .table-hover tbody tr:hover{
+          background:#eef5ff;
         }
 
         footer{
-            margin-top:60px;
-            padding:20px;
-            text-align:center;
-            color:gray;
-        }
+             margin-top:70px;
+             padding:18px;
+             text-align:center;
+              background:white;
+             color:#6c757d;
+             border-top:1px solid #ddd;
+         }
 
     </style>
 
@@ -54,7 +88,7 @@
 
 <div class="container">
 
-<a class="navbar-brand" href="#">
+<a class="navbar-brand" href="{{ url_for('main.home') }}">
 🚚 TransitOps
 </a>
 

@@ -2,84 +2,128 @@
 
 {% block content %}
 
-<div class="text-center mt-5">
+<div class="container mt-5">
 
-    <h1 class="display-4 fw-bold">
-        🚚 TransitOps
-    </h1>
+    <div class="text-center">
 
-    <p class="lead">
+        <h1 class="display-3 fw-bold text-primary">
+            🚚 TransitOps
+        </h1>
 
-        Smart Fleet Management System
+        <p class="lead mt-3">
+            Smart Fleet Management & Logistics Platform
+        </p>
 
-    </p>
+        <p class="text-muted">
+            Efficiently manage your vehicles, drivers, trips, maintenance,
+            fuel consumption, expenses and analytics from a single dashboard.
+        </p>
 
-    <p>
+        <div class="mt-4">
 
-        Manage Vehicles, Drivers, Trips,
-        Maintenance, Fuel and Expenses
-        from one dashboard.
+        {% if current_user.is_authenticated %}
 
-    </p>
+            <a href="{{ url_for('dashboard.dashboard') }}"
+               class="btn btn-primary btn-lg me-2">
 
-    <br>
+                📊 Open Dashboard
 
-    {% if current_user.is_authenticated %}
+            </a>
 
-        <a href="{{ url_for('dashboard.dashboard') }}"
-           class="btn btn-primary btn-lg">
+        {% else %}
 
-            Go to Dashboard
+            <a href="{{ url_for('auth.login') }}"
+               class="btn btn-primary btn-lg me-2">
 
-        </a>
+                Login
 
-    {% else %}
+            </a>
 
-        <a href="{{ url_for('auth.login') }}"
-           class="btn btn-primary btn-lg">
+            <a href="{{ url_for('auth.register') }}"
+               class="btn btn-success btn-lg">
 
-            Login
+                Register
 
-        </a>
+            </a>
 
-        <a href="{{ url_for('auth.register') }}"
-           class="btn btn-success btn-lg">
+        {% endif %}
 
-            Register
+        </div>
 
-        </a>
+    </div>
 
-    {% endif %}
+    <hr class="my-5">
 
-</div>
+    <h2 class="text-center mb-4">
+        System Features
+    </h2>
 
-<hr class="my-5">
+    <div class="row">
 
-<div class="row text-center">
+        <div class="col-md-4 mb-4">
 
-<div class="col-md-4">
+            <div class="card h-100 shadow">
 
-<h3>🚚 Vehicles</h3>
+                <div class="card-body text-center">
 
-<p>Manage fleet information.</p>
+                    <h3>🚚</h3>
 
-</div>
+                    <h5>Fleet Management</h5>
 
-<div class="col-md-4">
+                    <p>
+                        Manage vehicles, availability,
+                        maintenance history and fleet details.
+                    </p>
 
-<h3>🛣 Trips</h3>
+                </div>
 
-<p>Track ongoing and completed trips.</p>
+            </div>
 
-</div>
+        </div>
 
-<div class="col-md-4">
+        <div class="col-md-4 mb-4">
 
-<h3>📊 Reports</h3>
+            <div class="card h-100 shadow">
 
-<p>View operational insights.</p>
+                <div class="card-body text-center">
 
-</div>
+                    <h3>🛣️</h3>
+
+                    <h5>Trip Tracking</h5>
+
+                    <p>
+                        Assign drivers and vehicles,
+                        monitor trips and delivery operations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100 shadow">
+
+                <div class="card-body text-center">
+
+                    <h3>📊</h3>
+
+                    <h5>Reports & Analytics</h5>
+
+                    <p>
+                        Analyze expenses, fuel usage,
+                        maintenance and operational costs.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
